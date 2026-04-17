@@ -115,11 +115,11 @@ export default function App() {
   const handleFiles = useCallback((files) => {
     Array.from(files).forEach(file => {
       const id = Date.now() + Math.random()
-      const previewUrl = file.type.startsWith('image/') || file.type === 'application/pdf'
+      const previewUrl = file.type.startsWith('image/')
         ? URL.createObjectURL(file) : null
       const drawing = { id, name: file.name, fileType: file.type, previewUrl, loading: false, error: false, result: null }
       setDrawings(prev => [...prev, drawing])
-      if (file.type.startsWith('image/') || file.type === 'application/pdf') {
+      if (file.type.startsWith('image/')) {
         const reader = new FileReader()
         reader.onload = e => analyseDrawing(drawing, e.target.result.split(',')[1], file.type)
         reader.readAsDataURL(file)
