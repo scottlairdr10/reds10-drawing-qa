@@ -95,7 +95,7 @@ export default function App() {
           ]}]
         : [{ role: 'user', content: `Perform a full QA review of drawing "${drawing.name}" across all 8 phases. No image available — assess from filename only. Return only valid JSON.` }]
 
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch('/api/anthropic', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'anthropic-dangerous-direct-browser-calls': 'true' },
         body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 2000, system: SYSTEM_PROMPT, messages }),
@@ -139,7 +139,7 @@ export default function App() {
     setChatMessages(m => ({ ...m, [id]: updated }))
     setChatLoading(true)
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch('/api/anthropic', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'anthropic-dangerous-direct-browser-calls': 'true' },
         body: JSON.stringify({
@@ -399,3 +399,4 @@ export default function App() {
     </div>
   )
 }
+
